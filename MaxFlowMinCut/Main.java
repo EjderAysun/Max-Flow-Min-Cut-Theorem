@@ -16,11 +16,17 @@ public class Main {
         printEdgeInfo(G12);
         MaxFlowAlgorithm.FindMinCut(G12);
         System.out.println("\n------------");
-        System.out.println("G1 iterations (Edmonds-Karp Algorithm): ");
+        System.out.println("G1 iterations (Edmonds-Karp Widest Path Algorithm): ");
         Graph G13 = Graph1();
-        MaxFlowAlgorithm.EdmondsKarpAlgorithm(G13);
+        MaxFlowAlgorithm.EdmondsKarpAlgorithmWidestPath(G13);
         printEdgeInfo(G13);
         MaxFlowAlgorithm.FindMinCut(G13);
+        System.out.println("\n------------");
+        System.out.println("G1 iterations (Edmonds-Karp Algorithm): ");
+        Graph G14 = Graph1();
+        MaxFlowAlgorithm.EdmondsKarpAlgorithm(G14);
+        printEdgeInfo(G14);
+        MaxFlowAlgorithm.FindMinCut(G14);
         
         System.out.println("\n------------");
         
@@ -36,11 +42,17 @@ public class Main {
         printEdgeInfo(G22);
         MaxFlowAlgorithm.FindMinCut(G22);
         System.out.println("\n------------");
-        System.out.println("G2 iterations (Edmonds-Karp Algorithm): ");
+        System.out.println("G2 iterations (Edmonds-Karp Widest Path Algorithm): ");
         Graph G23 = Graph2();
-        MaxFlowAlgorithm.EdmondsKarpAlgorithm(G23);
+        MaxFlowAlgorithm.EdmondsKarpAlgorithmWidestPath(G23);
         printEdgeInfo(G23);
         MaxFlowAlgorithm.FindMinCut(G23);
+        System.out.println("\n------------");
+        System.out.println("G2 iterations (Edmonds-Karp Algorithm): ");
+        Graph G24 = Graph2();
+        MaxFlowAlgorithm.EdmondsKarpAlgorithm(G24);
+        printEdgeInfo(G24);
+        MaxFlowAlgorithm.FindMinCut(G24);
         
         System.out.println("\n------------");
         
@@ -56,11 +68,17 @@ public class Main {
         printEdgeInfo(G32);
         MaxFlowAlgorithm.FindMinCut(G32);
         System.out.println("\n------------");
-        System.out.println("G3 iterations (Edmonds-Karp Algorithm): ");
+        System.out.println("G3 iterations (Edmonds-Karp Widest Path Algorithm): ");
         Graph G33 = Graph3();
-        MaxFlowAlgorithm.EdmondsKarpAlgorithm(G33);
+        MaxFlowAlgorithm.EdmondsKarpAlgorithmWidestPath(G33);
         printEdgeInfo(G33);
         MaxFlowAlgorithm.FindMinCut(G33);
+        System.out.println("\n------------");
+        System.out.println("G3 iterations (Edmonds-Karp Algorithm): ");
+        Graph G34 = Graph3();
+        MaxFlowAlgorithm.EdmondsKarpAlgorithm(G34);
+        printEdgeInfo(G34);
+        MaxFlowAlgorithm.FindMinCut(G34);
                 
         System.out.println("\n------------");
         
@@ -76,29 +94,41 @@ public class Main {
         printEdgeInfo(G42);
         MaxFlowAlgorithm.FindMinCut(G42);
         System.out.println("\n------------");
-        System.out.println("G4 iterations (Edmonds-Karp Algorithm): ");
+        System.out.println("G4 iterations (Edmonds-Karp Widest Path Algorithm): ");
         Graph G43 = Graph4();
-        MaxFlowAlgorithm.EdmondsKarpAlgorithm(G43);
+        MaxFlowAlgorithm.EdmondsKarpAlgorithmWidestPath(G43);
         printEdgeInfo(G43);
         MaxFlowAlgorithm.FindMinCut(G43);
+        System.out.println("\n------------");
+        System.out.println("G4 iterations (Edmonds-Karp Algorithm): ");
+        Graph G44 = Graph4();
+        MaxFlowAlgorithm.EdmondsKarpAlgorithm(G44);
+        printEdgeInfo(G44);
+        MaxFlowAlgorithm.FindMinCut(G44);
 
-        // System.out.println("G5 iterations (FFA): ");
-        // Graph G51 = Graph5();
-        // MaxFlowAlgorithm.FordFulkersonMethod(G51);
-        // printEdgeInfo(G51);
-        // MaxFlowAlgorithm.FindMinCut(G51);
-        // System.out.println("\n------------");
-        // System.out.println("G5 iterations (Scaling Max-Flow): ");
-        // Graph G52 = Graph5();
-        // MaxFlowAlgorithm.ScalingMaxFlow(G52);
-        // printEdgeInfo(G52);
-        // MaxFlowAlgorithm.FindMinCut(G52);
-        // System.out.println("\n------------");
-        // System.out.println("G5 iterations (Edmonds-Karp Algorithm): ");
-        // Graph G53 = Graph5();
-        // MaxFlowAlgorithm.EdmondsKarpAlgorithm(G53);
-        // printEdgeInfo(G53);
-        // MaxFlowAlgorithm.FindMinCut(G53);
+        System.out.println("G5 iterations (FFA) (with adversary injection): ");
+        Graph G51 = Graph5();
+        MaxFlowAlgorithm.FordFulkersonMethod(G51);
+        printEdgeInfo(G51);
+        MaxFlowAlgorithm.FindMinCut(G51);
+        System.out.println("\n------------");
+        System.out.println("G5 iterations (Scaling Max-Flow): ");
+        Graph G52 = Graph5();
+        MaxFlowAlgorithm.ScalingMaxFlow(G52);
+        printEdgeInfo(G52);
+        MaxFlowAlgorithm.FindMinCut(G52);
+        System.out.println("\n------------");
+        System.out.println("G4 iterations (Edmonds-Karp Widest Path Algorithm): ");
+        Graph G53 = Graph5();
+        MaxFlowAlgorithm.EdmondsKarpAlgorithmWidestPath(G53);
+        printEdgeInfo(G53);
+        MaxFlowAlgorithm.FindMinCut(G53);
+        System.out.println("\n------------");
+        System.out.println("G5 iterations (Edmonds-Karp Algorithm): ");
+        Graph G54 = Graph5();
+        MaxFlowAlgorithm.EdmondsKarpAlgorithm(G54);
+        printEdgeInfo(G54);
+        MaxFlowAlgorithm.FindMinCut(G54);
     }
 
     public static void printEdgeInfo(Graph G) {

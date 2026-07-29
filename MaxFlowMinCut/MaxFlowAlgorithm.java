@@ -239,6 +239,76 @@ public class MaxFlowAlgorithm {
             else break;
         }
     }
+
+    public static boolean WidestPath(Graph G) {
+        LinkedList<Node> nodes = G.getNodes();
+        MaxHeap mh = new MaxHeap(nodes.size());
+        Node s = nodes.get(0); // s is source
+        mh.insert(s, Integer.MAX_VALUE);
+
+        while(mh.getSize() > 0) {
+            int capacityOfN = mh.getMax();
+            Node n = mh.extractMax();
+
+            if(n == nodes.getLast()) return true;
+
+            for(Edge e : n.getLeaving()) {
+                Node adjacentNode = e.getTo();
+                if (e.getForward() != 0 && mh.getPos(adjacentNode) != -2) {
+                    if(mh.getPos(adjacentNode) == -1) {
+                        if(capacityOfN < e.getForward()) {
+                            mh.insert(adjacentNode, capacityOfN);
+                        } else {
+                            mh.insert(adjacentNode, e.getForward());
+                        }
+                        adjacentNode.setPrevEdge(e);
+                        e.setCurrentDir(true);
+                    } else if(e.getForward() > capacityOfN) {
+                        mh.replace(capacityOfN, adjacentNode);
+                        adjacentNode.setPrevEdge(e);
+                        e.setCurrentDir(true);
+                    } else if (e.getForward() > mh.getCapacity(adjacentNode)) {
+                        mh.replace(e.getForward(), adjacentNode);
+                        adjacentNode.setPrevEdge(e);
+                        e.setCurrentDir(true);
+                    }
+                }
+            }
+            for (Edge e : n.getEntering()) {
+                Node adjacentNode = e.getFrom();
+                if(e.getBackward() != 0 && mh.getPos(adjacentNode) != -2) {
+                    if(mh.getPos(adjacentNode) == -1) {
+                        if(capacityOfN < e.getBackward()) {
+                            mh.insert(adjacentNode, capacityOfN);
+                        } else {
+                            mh.insert(adjacentNode, e.getBackward());
+                        }
+                        adjacentNode.setPrevEdge(e);
+                        e.setCurrentDir(false);
+                    } else if(e.getBackward() > capacityOfN) {
+                        mh.replace(capacityOfN, adjacentNode);
+                        adjacentNode.setPrevEdge(e);
+                        e.setCurrentDir(false);
+                    } else if (e.getBackward() > mh.getCapacity(adjacentNode)) {
+                        mh.replace(e.getBackward(), adjacentNode);
+                        adjacentNode.setPrevEdge(e);
+                        e.setCurrentDir(false);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static void EdmondsKarpAlgorithmWidestPath(Graph G) {
+        while(true) {
+            // find widest path from s to t
+            if(WidestPath(G)) {
+                augment(G);
+                PrintAllFlows(G);
+            } else break;
+        }
+    }
     
     // strongly polynomial Edmonds-Karp Algorithm: O(|V|.(|E|^2))
     public static void EdmondsKarpAlgorithm(Graph G) {
