@@ -240,6 +240,39 @@ public class MaxFlowAlgorithm {
         }
     }
 
+    // helper function for Scaling Max-Flow Algorithm
+    public static int defineDelta(Graph G) {
+        Node s = G.getSource();
+        int C = 0;
+        for (Edge e : s.getLeaving()) {
+            C += e.getCapacity();
+        }
+        // return (int)Math.pow(2, Math.floor(Math.log10(C)/Math.log10(2)));
+        // improvement:
+        return Integer.highestOneBit(C);
+    }
+    
+    // SCALING MAX-FLOW ALGORITHM
+    // Complexity: O((|E|^2).log_2(C))
+    // C is the max capacity (sum of capacity of all edges leaving from source(s))
+    public static void ScalingMaxFlow(Graph G) {
+        
+        int delta = defineDelta(G);
+        while(delta >= 1) {
+            while(true) {
+                if(DFS(G, delta)) {
+                    augment(G);
+                    PrintAllFlows(G);
+                }
+                else break;
+            }
+            System.out.println("Current delta:" + delta);
+            delta /= 2;
+        }
+    }
+
+    // |E| > |V|
+    // Complexity of widest path algorithm: O(|E|.log(|V|)
     public static boolean WidestPath(Graph G) {
         LinkedList<Node> nodes = G.getNodes();
         MaxHeap mh = new MaxHeap(nodes.size());
@@ -300,7 +333,10 @@ public class MaxFlowAlgorithm {
         return false;
     }
 
-    public static void EdmondsKarpAlgorithmWidestPath(Graph G) {
+    // C is max capacity
+    // O(|E|.log(|V|)xO(|E|.ln(C)) = O(|E|^2.ln(C).log(|V|))
+    // informally: O(m^2.lnC.logn)
+    public static void WidestPathMaxFlowAlgorithm(Graph G) {
         while(true) {
             // find widest path from s to t
             if(WidestPath(G)) {
@@ -320,37 +356,6 @@ public class MaxFlowAlgorithm {
                 PrintAllFlows(G);
             }
             else break;
-        }
-    }
-    
-    // helper function for Scaling Max-Flow Algorithm
-    public static int defineDelta(Graph G) {
-        Node s = G.getSource();
-        int C = 0;
-        for (Edge e : s.getLeaving()) {
-            C += e.getCapacity();
-        }
-        // return (int)Math.pow(2, Math.floor(Math.log10(C)/Math.log10(2)));
-        // improvement:
-        return Integer.highestOneBit(C);
-    }
-    
-    // SCALING MAX-FLOW ALGORITHM
-    // Complexity: O((|E|^2).log_2(C))
-    // C is the max capacity (sum of capacity of all edges leaving from source(s))
-    public static void ScalingMaxFlow(Graph G) {
-        
-        int delta = defineDelta(G);
-        while(delta >= 1) {
-            while(true) {
-                if(DFS(G, delta)) {
-                    augment(G);
-                    PrintAllFlows(G);
-                }
-                else break;
-            }
-            System.out.println("Current delta:" + delta);
-            delta /= 2;
         }
     }
     
