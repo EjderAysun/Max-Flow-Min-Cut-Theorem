@@ -40,8 +40,9 @@ public class MaxHeap {
     }
 
     public void replace(int newVal, Node n) {
-        heapTree[n.getIdx()] = newVal;
-        heapifyUp(n.getIdx(), newVal, n);
+        int idx = n.getIdx();
+        heapTree[pos[idx]] = newVal;
+        heapifyUp(pos[idx], newVal, n);
     }
 
     private void swap(int parentIdx, int idx, int val, Node n) {
